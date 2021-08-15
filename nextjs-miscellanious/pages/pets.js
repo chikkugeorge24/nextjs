@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import img from "../public/1.jpg";
+import img from "public/1.jpg";
 
 const shimmer = (w, h) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
