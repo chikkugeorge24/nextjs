@@ -414,6 +414,76 @@ Provides features like:
         "paths": {
           "@/layout/*": ["components/layout/*"]
         }
+        
+        
+## Preview Mode
+
+- Help applications that relay on Content Management System (CMS)
+- CMS is a tool that create, manage and modify content on a website without the need for specialized technical knowledge
+- Static Generation is useful when pages fetch data from a headless CMS. However, it’s not ideal when we are writing a draft on headless CMS and want to preview the draft immediately on page. We want Next.js to render these pages at request time instead of build time and fetch the draft content instead of the published content. We want Next.js to bypass Static Generation only for this specific case.
+- **Step 1. Create and access a preview API route**
+    
+    - Create a preview API route. It can have any name - e.g. `pages/api/preview.js`
+    - In this API route, we need to call `setPreviewData` on the response object. The argument for setPreviewData should be an object, and this can be used by getStaticProps.
+    - `res.setPreviewData` sets some cookies on the browser which turns on the preview mode. Any requests to Next.js containing these cookies will be considered as the preview mode, and the behavior for statically generated pages will change.
+
+            export default function handler(req, res) {
+              res.setPreviewData({})
+              res.end('Preview mode enabled')
+            }
+
+    - `__prerender_bypass` and `__next_preview_data` cookies will be set on this request.
+    
+- **Step 2. Update getStaticProps**
+   
+   - If you request a page which has getStaticProps with the preview mode cookies set (via res.setPreviewData), then getStaticProps will be called at request time (instead of at build time).
+   - It will be called with a context object where:
+
+        `context.preview` will be true.
+        `context.previewData` will be the same as the argument used for setPreviewData.
+        
+            export async function getStaticProps(context) {
+              console.log("GET static props", context.previewData);
+              return {
+                props: {
+                  data: context.preview
+                    ? "List of draft articles"
+                    : "List of published articles",
+                },
+              };
+            }
+
+- **Clear the preview mode cookies**
+
+    - By default, no expiration date is set for the preview mode cookies, so the preview mode ends when the browser is closed.
+    - To clear the preview cookies manually, we can create an API route which calls `clearPreviewData` and then access this API route.
+    
+            export default function handler(req, res) {
+              res.clearPreviewData();
+              res.end("Preview mode disabled");
+            }
+            
+## Redirects
+
+- Redirects allow you to redirect an incoming request path to a different destination path.
+- Create a file `next.config.js` which contains `redirects` key:
+    
+        module.exports = {
+          async redirects() {
+            return [
+              {
+                source: '/about',
+                destination: '/',
+                permanent: true,
+              },
+            ]
+          },
+        }
+- `redirects` is an async function that expects an array to be returned holding objects with `source, destination, and permanent` properties:
+
+    - `source` is the incoming request path pattern.
+    - `destination` is the path you want to route to.
+    - `permanent` if the redirect is permanent or not. 307 - temporary redirect, 308 - permanent redirect
 
 ## Learn More
 
