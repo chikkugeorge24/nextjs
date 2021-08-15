@@ -392,6 +392,18 @@ Provides features like:
              }
           }
        } 
+       
+       
+## Static HTML Export
+
+- **next export** exports all the pages to static HTML files that can serve without the need of a nodejs server
+- We can host the app on any static hosting service or CDN without having to maintain a server
+- We can't use ISR or SSR
+- Relay on client side data fetching for dynamic content
+- In package.json, add the script: **"export" : "next build && next export"**
+- Image Optimization using Next.js' default loader is not compatible with `next export`.
+- Pages with `getServerSideProps` can not be exported.
+- Pages with `fallback` enabled in `getStaticPaths` can not be exported.
 
 ## Learn More
 
