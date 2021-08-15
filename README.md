@@ -379,6 +379,20 @@ Provides features like:
         - When blur, the **blurDataURL** property will be used as the placeholder. If src is an object from a static import and the imported image is jpg, png, or webp, then blurDataURL will automatically be populated.For dynamic images, we must provide the blurDataURL property.
         - When empty, there will be no placeholder while the image is loading, only empty space.
 
+
+## Absolute Imports & Module Paths
+
+- Create jsconfig.json file
+       
+       {
+          "compilerOptions": {
+            "baseUrl": ".",
+            "paths": {
+              "@/layout/*": ["components/layout/*"]
+             }
+          }
+       } 
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
