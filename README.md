@@ -405,6 +405,16 @@ Provides features like:
 - Pages with `getServerSideProps` can not be exported.
 - Pages with `fallback` enabled in `getStaticPaths` can not be exported.
 
+## Typescript Support
+- **npm install --save-dev typescript @types/react**
+- npm run dev will create a **tsconfig.json** and **next-env.d** file
+- In tsconfig.json file, add the below compiler options to support absolute imports and module paths:
+        
+        "baseUrl": ".",
+        "paths": {
+          "@/layout/*": ["components/layout/*"]
+        }
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
