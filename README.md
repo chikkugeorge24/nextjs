@@ -319,7 +319,7 @@ Provides features like:
 - Create filename.module.scss, and import the SASS file as:
     - **@import 'SASS filename'**
 
-**Layout**
+## Layout
 - Deconstruct a page into a series of components.
 - **Single Shared Layout with Custom App**
     
@@ -358,6 +358,26 @@ Provides features like:
                 return Component.getLayout(<Component {...pageProps} />);
             }
   
+- **Head Component**
+
+    - **import Head from "next/head"**
+             
+             <Head>
+                <title>{title}</title>
+                <meta name="description" content={description} />
+            </Head>
+            
+- **Image Component and its optimization**
+    - Next.js has a built-in Image Component and Automatic Image Optimization.
+    - The Next.js Image Component, **next/image**, is an extension of the HTML **img** element.
+    - The Automatic Image Optimization allows for resizing, optimizing, and serving images in modern formats like **WebP**
+    - Instead of optimizing images at build time, Next.js optimizes images on-demand, as users request them.Images are lazy loaded by default. That means your page speed isn't penalized for images outside the viewport. Images load as they are scrolled into viewport.
+    - **import Image from 'next/image'**
+    - Optional properties to Image component:
+
+        - A **placeholder** to use while the image is loading, possible values are blur or empty. Defaults to empty.
+        - When blur, the **blurDataURL** property will be used as the placeholder. If src is an object from a static import and the imported image is jpg, png, or webp, then blurDataURL will automatically be populated.For dynamic images, we must provide the blurDataURL property.
+        - When empty, there will be no placeholder while the image is loading, only empty space.
 
 ## Learn More
 
