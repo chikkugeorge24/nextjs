@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import img from "public/1.jpg";
 
 const shimmer = (w, h) => `
@@ -24,7 +24,8 @@ const toBase64 = (str) =>
 const Pets = () => {
   return (
     <div>
-      <Image src={img} alt="pet" width="280" height="420" placeholder="blur" />
+      Pets
+      {/* <Image src={img} alt="pet" width="280" height="420" placeholder="blur" />
       {["1", "2", "3", "4", "5"].map((path) => {
         return (
           <div key={path}>
@@ -40,7 +41,7 @@ const Pets = () => {
             />
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };
