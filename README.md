@@ -319,6 +319,44 @@ Provides features like:
 - Create filename.module.scss, and import the SASS file as:
     - **@import 'SASS filename'**
 
+**Layout**
+- Deconstruct a page into a series of components.
+- **Single Shared Layout with Custom App**
+    
+    - One layout for the entire application, we can create a Custom App(_app.js) and wrap the application with the layout.
+       
+           return (
+                <>
+                  <Header />
+                  <Component {...pageProps} />
+                  <Footer />
+                </>
+           );
+- **Per-Page Layouts**
+
+    - If we need multiple layouts, we can add a property **getLayout** to the page, allowing to return a React component for the layout.
+        
+            About.js
+
+            ------------
+        
+            About.getLayout = function PageLayout(page) {
+              return (
+                <>
+                  {page}
+                  <Footer />
+                </>
+              );
+            };
+        
+       
+           _app.js
+
+            ------------
+        
+            if (Component.getLayout) {
+                return Component.getLayout(<Component {...pageProps} />);
+            }
   
 
 ## Learn More
