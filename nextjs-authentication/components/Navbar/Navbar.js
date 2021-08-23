@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { signIn, signOut } from "next-auth/client";
 
 const Navbar = () => {
   return (
