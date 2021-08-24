@@ -5,7 +5,7 @@ import "../components/Navbar/Navbar.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider>
+    <Provider session={pageProps.session}>
       <Navbar />
       <Component {...pageProps} />
     </Provider>
