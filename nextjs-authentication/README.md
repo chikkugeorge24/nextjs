@@ -6,7 +6,7 @@
   - Server side authentication
   - API routes authentication
 
-- **Authentication Providers**
+- **Client side authentication**
   
   - If we want a full-featured authentication system with built-in providers (Google, Facebook, GitHub…), JWT, JWE, email/password, magic links, need to use **next-auth**.
   - **npm i next-auth** 
@@ -36,3 +36,12 @@
     - To make the session available across all the pages/components, use **NextAuth Provider** and wrap the component inside Provider tags
       
       import { Provider } from 'next-auth/client'
+      
+      
+- **Server side authentication**
+
+  - If we export an async function called `getServerSideProps` from a page, Next.js will pre-render this page on each request using the data returned by getServerSideProps.
+  - Use `getSession` hook along with `context` param to get the session object. 
+  - Pass the session to `Provider` in _app.js to avoid the flicker effect
+  - If session is null, return a redirect object with a specified destination to secure server side pages.
+  - Use getSession inside `handler` function to secure API routes.
