@@ -32,3 +32,7 @@
     - http://localhost:3000/api/auth/signin will redirect to the default signin page provided by github. This will set a token **next-auth.session-token** in cookies. http://localhost:3000/api/auth/signout will signout from the page and will remove the stored session cookie.
     - To signIn and signOut using buttons, import **signIn** and **signOut** methods from **next-auth/client** and integrate the methods with button click.
     - Use **useSession** hook of next-auth/client which return two params: **[session, loading]** to achieve client side authentication.
+    - Use **getSession** hook of next-auth/client to secure pages in client side. This hook will return a session or a null.
+    - To make the session available across all the pages/components, use **NextAuth Provider** and wrap the component inside Provider tags
+      
+      import { Provider } from 'next-auth/client'
