@@ -8,6 +8,14 @@ export default blog;
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: `/api/auth/signin?callbackUrl=${process.env.CALLBACK_URL}`,
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       session,
