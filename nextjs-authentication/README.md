@@ -45,3 +45,26 @@
   - Pass the session to `Provider` in _app.js to avoid the flicker effect
   - If session is null, return a redirect object with a specified destination to secure server side pages.
   - Use getSession inside `handler` function to secure API routes.
+
+- **Connecting to Database**
+
+  - Create a database in mongodb atlas
+  - **npm i mongodb**
+  - Paste Username, password and database url in .env file and make use of it.
+  - Add database, jwt and secret in NextAuth file
+  
+        export default NextAuth({
+          providers: [
+            Providers.GitHub({
+              clientId: process.env.GITHUB_ID,
+              clientSecret: process.env.GITHUB_SECRET,
+            }),
+          ],
+          database: process.env.DB_URL,
+          session: {
+            jwt: true,
+          },
+          jwt: {
+            secret: "yhhkkkkooo",
+          },
+        });
