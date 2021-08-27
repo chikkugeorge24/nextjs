@@ -68,3 +68,31 @@
             secret: "yhhkkkkooo",
           },
         });
+        
+-**Callbacks**
+
+  - Callbacks are asynchronous functions that can use to control what happens when an action is performed.
+  - **JWT Callback**
+    
+    - JSON Web Token callback is called whenever a JSON Web Token is created (i.e. at sign in) or updated (i.e whenever a session is accessed in the client).
+    - eg: `/api/auth/signin`, `getSession()`,   `useSession()` , `/api/auth/session`
+    - If we want to pass data such as User ID, OAuth Access Token, etc. to the browser, we can persist it in the token and use the session() callback to return it.
+
+  - **Session Callback**
+  
+    - The session callback is called whenever a session is checked. By default, only a subset of the token is returned for increased security. If we want to make something available you added to the token through the jwt() callback, you have to explicitly forward it here to make it available to the client.
+    - eg: `getSession()`,   `useSession()` , `/api/auth/session`
+   
+        
+          callbacks: {
+            async jwt(token, user) {
+              if (user) {
+                token.id = user.id;
+              }
+              return token;
+            },
+            async session(session, token) {
+              session.user.id = token.id;
+              return session;
+            },
+          }      
